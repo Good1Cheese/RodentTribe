@@ -1,4 +1,4 @@
-﻿namespace Mobile;
+﻿namespace Mobile.Pages;
 
 public partial class AppShell : Shell
 {
