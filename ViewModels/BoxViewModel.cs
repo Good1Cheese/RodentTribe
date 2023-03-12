@@ -15,7 +15,7 @@ public class BoxViewModel
 
         Boxes = _database.Connection.Table<Box>();
 
-        MoveToRodentsCommand = new Command(async () =>
+        MoveToRodentViewCommand = new Command(async () =>
         {
             
         });
@@ -23,5 +23,5 @@ public class BoxViewModel
 
     public TableQuery<Box> Boxes { get; set; }
     public Box Selected { get; set; }
-    public ICommand MoveToRodentsCommand { get; private set; }
+    public ICommand MoveToRodentViewCommand { get; private set; }
 }

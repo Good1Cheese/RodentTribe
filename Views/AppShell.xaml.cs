@@ -6,7 +6,7 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 
-        Routing.RegisterRoute(nameof(ClosetSelectView), typeof(ClosetSelectView));
-        Routing.RegisterRoute(nameof(BoxSelectView), typeof(BoxSelectView));
+        Routing.RegisterRoute(nameof(ClosetView), typeof(ClosetView));
+        Routing.RegisterRoute(nameof(BoxView), typeof(BoxView));
     }
 }

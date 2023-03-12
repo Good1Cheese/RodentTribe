@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="RodentTribe.Views.ClosetSelectView"
+    x:Class="RodentTribe.Views.ClosetView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:viewModels="clr-namespace:RodentTribe.ViewModels"
@@ -23,7 +23,7 @@
                         BackgroundColor="White"
                         BorderColor="Black"
                         BorderWidth="1"
-                        Command="{Binding Path=MoveToBoxSelectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
+                        Command="{Binding Path=MoveToBoxViewCommand, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
                         CornerRadius="15"
                         FontSize="20"
                         Text="{x:Binding Name}"

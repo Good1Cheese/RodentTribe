@@ -1,6 +1,5 @@
 ﻿using RodentTribe.Data;
 using RodentTribe.Data.Models;
-using RodentTribe.Views;
 using SQLite;
 using System.Windows.Input;
 
@@ -16,13 +15,13 @@ public class ClosetViewModel : ViewModelBase
 
         Closets = _database.Connection.Table<Сloset>();
 
-        MoveToBoxSelectCommand = new Command(async () =>
+        MoveToBoxViewCommand = new Command(async () =>
         {
-            await Shell.Current.GoToAsync(nameof(BoxSelectView));
+            await Shell.Current.GoToAsync(nameof(Views.BoxView));
         });
     }
 
     public TableQuery<Сloset> Closets { get; set; }
     public Сloset Selected { get; set; }
-    public ICommand MoveToBoxSelectCommand { get; private set; }
+    public ICommand MoveToBoxViewCommand { get; private set; }
 }

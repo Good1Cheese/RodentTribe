@@ -6,5 +6,5 @@
     xmlns:views="clr-namespace:RodentTribe.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent ContentTemplate="{DataTemplate views:ClosetSelectView}" />
+    <ShellContent ContentTemplate="{DataTemplate views:ClosetView}" />
 </Shell>
