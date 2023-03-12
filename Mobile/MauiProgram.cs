@@ -1,18 +1,28 @@
-﻿namespace Mobile;
+﻿using RodentTribe.Data;
+using RodentTribe.ViewModels;
+
+namespace Mobile;
 
 public static class MauiProgram
 {
-	public static MauiApp CreateMauiApp()
-	{
-		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+    public static MauiApp CreateMauiApp()
+    {
+        var builder = MauiApp.CreateBuilder();
+        builder
+            .UseMauiApp<App>()
+            .ConfigureFonts();
 
-		return builder.Build();
-	}
+        var services = builder.Services;
+
+        services.AddSingleton<Database>();
+        using (var provider = services.BuildServiceProvider())
+        {
+            SeedData.Initialize(provider);
+        }
+
+        services.AddSingleton<ClosetsViewModel>();
+        services.AddSingleton<AppViewModel>();
+
+        return builder.Build();
+    }
 }

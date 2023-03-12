@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="RodentTribe.Views.ClosetSelectView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="WhiteSmoke">
+
+    <Grid>
+        <CollectionView
+            x:Name="ClosetList"
+            Margin="10,25"
+            ItemsSource="{Binding Closets}"
+            SelectedItem="{Binding Selected}"
+            SelectionChangedCommand="{Binding MoveToBoxSelectViewCommand}"
+            SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        Margin="6"
+                        BackgroundColor="White"
+                        Stroke="Black"
+                        StrokeThickness="1">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15" />
+                        </Border.StrokeShape>
+                        <Label
+                            Padding="15"
+                            FontSize="20"
+                            Text="{x:Binding Name}"
+                            TextColor="Black" />
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#e3e3e3" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

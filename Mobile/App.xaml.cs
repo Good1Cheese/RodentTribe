@@ -1,11 +1,17 @@
-﻿namespace Mobile;
+﻿using RodentTribe.Views;
+using RodentTribe.ViewModels;
+
+namespace Mobile;
 
 public partial class App : Application
 {
-	public App()
+	public App(AppViewModel appViewModel)
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+        MainPage = new AppShell
+        {
+            BindingContext = appViewModel
+        };
+    }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mobile", "Mobile\Mobile.csproj", "{1264D56D-418C-46D7-9E03-7BB7AC6DCAB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RodentTribe", "Mobile\RodentTribe.csproj", "{1264D56D-418C-46D7-9E03-7BB7AC6DCAB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
