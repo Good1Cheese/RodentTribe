@@ -34,5 +34,31 @@ public static class SeedData
 
             connection.InsertAll(data);
         }
+
+        var boxes = connection.Table<Box>();
+        if (!boxes.Any())
+        {
+            var data = new List<Box>
+            {
+                new Box
+                {
+                    Name = "Бокс 1"
+                },
+                new Box
+                {
+                    Name = "Бокс 2"
+                },
+                new Box
+                {
+                    Name = "Бокс 3"
+                },
+                new Box
+                {
+                    Name = "Бокс 4"
+                }
+            };
+
+            connection.InsertAll(data);
+        }
     }
 }

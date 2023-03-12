@@ -15,5 +15,6 @@ public class Database
         Connection = new(DatabasePath);
 
         Connection.CreateTable<Сloset>();
+        Connection.CreateTable<Box>();
     }
 }

@@ -2,10 +2,12 @@
 
 public class AppViewModel : ViewModelBase
 {
-    public AppViewModel(ClosetsViewModel closetsViewModel)
+    public AppViewModel(ClosetViewModel closetsViewModel, BoxViewModel boxViewModel)
     {
-        ClosetsViewModel = closetsViewModel;
+        ClosetViewModel = closetsViewModel;
+        BoxViewModel = boxViewModel;
     }
 
-    public ClosetsViewModel ClosetsViewModel { get; }
+    public ClosetViewModel ClosetViewModel { get; }
+    public BoxViewModel BoxViewModel { get; }
 }

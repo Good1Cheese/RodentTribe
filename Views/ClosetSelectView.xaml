@@ -3,31 +3,31 @@
     x:Class="RodentTribe.Views.ClosetSelectView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="WhiteSmoke">
-
+    xmlns:viewModels="clr-namespace:RodentTribe.ViewModels"
+    Title="Выбор шкафа"
+    BackgroundColor="WhiteSmoke"
+    BindingContext="{Binding ClosetViewModel}"
+    Shell.BackgroundColor="WhiteSmoke"
+    Shell.TitleColor="Black">
     <Grid>
         <CollectionView
             x:Name="ClosetList"
             Margin="10,25"
             ItemsSource="{Binding Closets}"
-            SelectedItem="{Binding Selected}"
-            SelectionChangedCommand="{Binding MoveToBoxSelectViewCommand}"
-            SelectionMode="Single">
+            SelectedItem="{Binding Selected}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border
+                    <Button
                         Margin="6"
+                        Padding="15"
                         BackgroundColor="White"
-                        Stroke="Black"
-                        StrokeThickness="1">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15" />
-                        </Border.StrokeShape>
-                        <Label
-                            Padding="15"
-                            FontSize="20"
-                            Text="{x:Binding Name}"
-                            TextColor="Black" />
+                        BorderColor="Black"
+                        BorderWidth="1"
+                        Command="{Binding Path=MoveToBoxSelectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
+                        CornerRadius="15"
+                        FontSize="20"
+                        Text="{x:Binding Name}"
+                        TextColor="Black">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup Name="CommonStates">
                                 <VisualState Name="Normal" />
@@ -38,7 +38,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                    </Border>
+                    </Button>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

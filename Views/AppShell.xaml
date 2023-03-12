@@ -6,11 +6,5 @@
     xmlns:views="clr-namespace:RodentTribe.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Выбор шкафа"
-        BindingContext="{Binding ClosetsViewModel}"
-        ContentTemplate="{DataTemplate views:ClosetSelectView}"
-        Route="MainPage"
-        Shell.BackgroundColor="WhiteSmoke"
-        Shell.TitleColor="Black" />
+    <ShellContent ContentTemplate="{DataTemplate views:ClosetSelectView}" />
 </Shell>

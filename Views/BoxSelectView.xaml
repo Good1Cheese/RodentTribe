@@ -3,11 +3,43 @@
     x:Class="RodentTribe.Views.BoxSelectView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="BoxSelectView">
-    <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    Title="Выбор бокса"
+    BackgroundColor="WhiteSmoke"
+    BindingContext="{Binding BoxViewModel}"
+    Shell.BackgroundColor="WhiteSmoke"
+    Shell.TitleColor="Black">
+    <Grid>
+        <CollectionView
+            x:Name="ClosetList"
+            Margin="10,25"
+            ItemsSource="{Binding Boxes}"
+            SelectedItem="{Binding Selected}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                        Margin="6"
+                        Padding="15"
+                        BackgroundColor="White"
+                        BorderColor="Black"
+                        BorderWidth="1"
+                        Command="{Binding}"
+                        CornerRadius="15"
+                        FontSize="20"
+                        Text="{x:Binding Name}"
+                        TextColor="Black">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#e3e3e3" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using RodentTribe.Data;
+﻿using RodentTribe.Data;
 using RodentTribe.ViewModels;
 
 namespace RodentTribe;
@@ -21,7 +20,8 @@ public static class MauiProgram
             SeedData.Initialize(provider);
         }
 
-        services.AddSingleton<ClosetsViewModel>();
+        services.AddSingleton<ClosetViewModel>();
+        services.AddSingleton<BoxViewModel>();
         services.AddSingleton<AppViewModel>();
 
         return builder.Build();
