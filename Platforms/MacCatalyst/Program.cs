@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Mobile;
+namespace RodentTribe;
 
 public class Program
 {

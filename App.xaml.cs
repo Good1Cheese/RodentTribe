@@ -1,7 +1,7 @@
-﻿using RodentTribe.Views;
-using RodentTribe.ViewModels;
+﻿using RodentTribe.ViewModels;
+using RodentTribe.Views;
 
-namespace Mobile;
+namespace RodentTribe;
 
 public partial class App : Application
 {

@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Mobile;
+namespace RodentTribe;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

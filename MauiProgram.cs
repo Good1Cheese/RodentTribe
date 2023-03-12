@@ -1,7 +1,8 @@
-﻿using RodentTribe.Data;
+﻿using Microsoft.Extensions.Logging;
+using RodentTribe.Data;
 using RodentTribe.ViewModels;
 
-namespace Mobile;
+namespace RodentTribe;
 
 public static class MauiProgram
 {

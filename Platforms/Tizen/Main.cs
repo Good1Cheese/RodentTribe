@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace Mobile;
+namespace RodentTribe;
 
 class Program : MauiApplication
 {
