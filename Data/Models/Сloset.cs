@@ -10,5 +10,6 @@ public class Сloset
     public int Id { get; set; }
 
     [Column("name")]
+    [MaxLength(128)]
     public string Name { get; set; }
 }

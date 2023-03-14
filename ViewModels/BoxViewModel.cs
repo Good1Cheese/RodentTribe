@@ -1,5 +1,6 @@
 ﻿using RodentTribe.Data;
 using RodentTribe.Data.Models;
+using RodentTribe.Views;
 using SQLite;
 using System.Windows.Input;
 
@@ -17,7 +18,7 @@ public class BoxViewModel
 
         MoveToRodentViewCommand = new Command(async () =>
         {
-            
+            await Shell.Current.GoToAsync(nameof(RodentView));
         });
     }
 

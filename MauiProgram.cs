@@ -1,4 +1,5 @@
-﻿using RodentTribe.Data;
+﻿using CommunityToolkit.Maui;
+using RodentTribe.Data;
 using RodentTribe.ViewModels;
 
 namespace RodentTribe;
@@ -10,6 +11,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts();
 
         var services = builder.Services;
@@ -22,6 +24,7 @@ public static class MauiProgram
 
         services.AddSingleton<ClosetViewModel>();
         services.AddSingleton<BoxViewModel>();
+        services.AddSingleton<RodentViewModel>();
         services.AddSingleton<AppViewModel>();
 
         return builder.Build();

@@ -16,5 +16,6 @@ public class Database
 
         Connection.CreateTable<Сloset>();
         Connection.CreateTable<Box>();
+        Connection.CreateTable<Rodent>();
     }
 }
