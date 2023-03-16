@@ -12,6 +12,14 @@ public class Rodent
     [Column("age")]
     public int Age { get; set; }
 
+    [Indexed]
+    [Column("closet_id")]
+    public int ClosetId { get; set; }
+
+    [Indexed]
+    [Column("box_id")]
+    public int BoxId { get; set; }
+
     [Column("is_male")]
     public bool IsMale { get; set; }
 

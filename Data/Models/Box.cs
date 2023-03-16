@@ -3,13 +3,7 @@
 namespace RodentTribe.Data.Models;
 
 [Table("Boxes")]
-public class Box
+public class Box : NameOnlyModel
 {
-    [PrimaryKey, AutoIncrement]
-    [Column("id")]
-    public int Id { get; set; }
 
-    [Column("name")]
-    [MaxLength(128)]
-    public string Name { get; set; }
 }

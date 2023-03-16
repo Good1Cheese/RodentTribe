@@ -1,28 +1,17 @@
 ﻿using RodentTribe.Data;
 using RodentTribe.Data.Models;
 using RodentTribe.Views;
-using SQLite;
-using System.Windows.Input;
-
 namespace RodentTribe.ViewModels;
 
-public class BoxViewModel
+public class BoxViewModel : SimpleViewModel<Box>
 {
-    private readonly Database _database;
-
     public BoxViewModel(Database database)
+        : base(database)
     {
-        _database = database;
-
-        Boxes = _database.Connection.Table<Box>();
-
-        MoveToRodentViewCommand = new Command(async () =>
-        {
-            await Shell.Current.GoToAsync(nameof(RodentView));
-        });
     }
 
-    public AsyncTableQuery<Box> Boxes { get; set; }
-    public Box Selected { get; set; }
-    public ICommand MoveToRodentViewCommand { get; private set; }
+    protected override async Task MoveToNextView()
+    {
+        await Shell.Current.GoToAsync(nameof(RodentView));
+    }
 }
