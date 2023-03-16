@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace RodentTribe.ViewModels;
 
-public class ViewModelBase : INotifyPropertyChanged
+public class NotifyPropertyChanged : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 

@@ -6,16 +6,17 @@ namespace RodentTribe.Data;
 public class Database
 {
     public const string DatabaseFileName = "RodentTribe.db";
+
     public static string DatabasePath => Path.Combine(FileSystem.AppDataDirectory, DatabaseFileName);
 
-    public SQLiteConnection Connection { get; private set; }
+    public SQLiteAsyncConnection Connection { get; private set; }
 
     public Database()
     {
-        Connection = new(DatabasePath);
+        Connection = new SQLiteAsyncConnection(DatabasePath);
 
-        Connection.CreateTable<Сloset>();
-        Connection.CreateTable<Box>();
-        Connection.CreateTable<Rodent>();
+        Connection.CreateTableAsync<Сloset>();
+        Connection.CreateTableAsync<Box>();
+        Connection.CreateTableAsync<Rodent>();
     }
 }

@@ -22,7 +22,7 @@ public class BoxViewModel
         });
     }
 
-    public TableQuery<Box> Boxes { get; set; }
+    public AsyncTableQuery<Box> Boxes { get; set; }
     public Box Selected { get; set; }
     public ICommand MoveToRodentViewCommand { get; private set; }
 }

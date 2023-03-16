@@ -1,6 +1,6 @@
 ﻿namespace RodentTribe.ViewModels;
 
-public class AppViewModel : ViewModelBase
+public class AppViewModel
 {
     public AppViewModel(ClosetViewModel closetsViewModel, BoxViewModel boxViewModel, RodentViewModel rodentViewModel)
     {

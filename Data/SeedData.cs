@@ -10,7 +10,7 @@ public static class SeedData
         var connection = database.Connection;
 
         var closets = connection.Table<Сloset>();
-        if (!closets.Any())
+        if (closets.CountAsync().Result == 0)
         {
             var data = new List<Сloset>
             {
@@ -32,11 +32,11 @@ public static class SeedData
                 }
             };
 
-            connection.InsertAll(data);
+            connection.InsertAllAsync(data);
         }
 
         var boxes = connection.Table<Box>();
-        if (!boxes.Any())
+        if (boxes.CountAsync().Result == 0)
         {
             var data = new List<Box>
             {
@@ -58,7 +58,7 @@ public static class SeedData
                 }
             };
 
-            connection.InsertAll(data);
+            connection.InsertAllAsync(data);
         }
     }
 }

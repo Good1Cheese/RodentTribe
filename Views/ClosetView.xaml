@@ -7,69 +7,71 @@
     xmlns:viewModels="clr-namespace:RodentTribe.ViewModels"
     BindingContext="{Binding ClosetViewModel}">
 
-    <VerticalStackLayout BackgroundColor="WhiteSmoke">
-        <Grid Margin="10,15">
-            <Label
-                FontSize="30"
-                Text="Выбор шкафа"
-                TextColor="Black" />
+    <ScrollView>
+        <StackLayout BackgroundColor="WhiteSmoke">
+            <Grid Margin="10,15">
+                <Label
+                    FontSize="30"
+                    Text="Выбор шкафа"
+                    TextColor="Black" />
+                <Button
+                    BackgroundColor="Transparent"
+                    Command="{Binding ToggleEditModeCommand}"
+                    HeightRequest="35"
+                    HorizontalOptions="End"
+                    ImageSource="edit.svg"
+                    WidthRequest="35" />
+            </Grid>
+            <CollectionView
+                x:Name="ClosetList"
+                Margin="10,25"
+                ItemsSource="{Binding Closets}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Button
+                                Margin="6"
+                                Padding="15"
+                                BackgroundColor="White"
+                                BorderColor="Black"
+                                BorderWidth="1"
+                                Command="{Binding Path=SelectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
+                                CommandParameter="{Binding}"
+                                FontSize="20"
+                                Text="{x:Binding Name}"
+                                TextColor="Black">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#e3e3e3" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Button>
+                            <Button
+                                Margin="0,0,15,0"
+                                BackgroundColor="Transparent"
+                                Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
+                                CommandParameter="{Binding}"
+                                HeightRequest="50"
+                                HorizontalOptions="End"
+                                ImageSource="delete.svg"
+                                IsVisible="{Binding IsInEditMode, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
+                                WidthRequest="50" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <Button
                 BackgroundColor="Transparent"
-                Command="{Binding ToggleEditModeCommand}"
-                HeightRequest="35"
-                HorizontalOptions="End"
-                ImageSource="edit.svg"
-                WidthRequest="35" />
-        </Grid>
-
-        <CollectionView
-            x:Name="ClosetList"
-            Margin="10,25"
-            ItemsSource="{Binding Closets}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Button
-                            Margin="6"
-                            Padding="15"
-                            BackgroundColor="White"
-                            BorderColor="Black"
-                            BorderWidth="1"
-                            Command="{Binding Path=SelectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
-                            CommandParameter="{Binding}"
-                            FontSize="20"
-                            Text="{x:Binding Name}"
-                            TextColor="Black">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup Name="CommonStates">
-                                    <VisualState Name="Normal" />
-                                    <VisualState Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#e3e3e3" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Button>
-                        <Button
-                            Margin="0,0,15,0"
-                            BackgroundColor="Transparent"
-                            Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
-                            CommandParameter="{Binding}"
-                            HeightRequest="50"
-                            HorizontalOptions="End"
-                            ImageSource="delete.svg"
-                            IsVisible="{Binding IsInEditMode, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
-                            WidthRequest="50" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button
-            BackgroundColor="Transparent"
-            Command="{Binding AddCommand}"
-            HeightRequest="50"
-            ImageSource="add.svg"
-            WidthRequest="50" />
-    </VerticalStackLayout>
+                Command="{Binding AddCommand}"
+                HeightRequest="50"
+                ImageSource="add.svg"
+                IsVisible="{Binding IsInEditMode, Source={RelativeSource AncestorType={x:Type viewModels:ClosetViewModel}}}"
+                WidthRequest="50" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
