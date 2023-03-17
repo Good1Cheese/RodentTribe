@@ -1,6 +1,8 @@
 ﻿using RodentTribe.Data;
 using RodentTribe.Data.Models;
+using RodentTribe.ViewModels.Abstract;
 using RodentTribe.Views;
+
 namespace RodentTribe.ViewModels;
 
 public class BoxViewModel : SimpleViewModel<Box>

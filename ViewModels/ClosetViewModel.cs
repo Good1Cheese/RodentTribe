@@ -1,6 +1,6 @@
-﻿using Android.Widget;
-using RodentTribe.Data;
+﻿using RodentTribe.Data;
 using RodentTribe.Data.Models;
+using RodentTribe.ViewModels.Abstract;
 
 namespace RodentTribe.ViewModels;
 
