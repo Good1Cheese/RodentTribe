@@ -1,4 +1,4 @@
-﻿using RodentTribe.Data;
+﻿using RodentTribe.Data.Database;
 using RodentTribe.Data.Models;
 
 namespace RodentTribe.ViewModels.Abstract;
@@ -14,22 +14,20 @@ public abstract class SimpleViewModel<TModel> : ViewModelBase<TModel> where TMod
     {
         var newItem = new TModel() { Name = "Новая запись" };
         await _database.Connection.InsertAsync(newItem);
-        List.Add(newItem);
+        Models.Add(newItem);
     }
 
     public override async void Delete(object obj)
     {
         await _database.Connection.DeleteAsync(obj);
-        List.Remove((TModel)obj);
+        Models.Remove((TModel)obj);
     }
 
     public override async void Select(object obj)
     {
-        Selected = (TModel)obj;
-
         if (IsInEditMode)
         {
-            await RenameSelected(Selected);
+            await RenameSelected((TModel)obj);
             return;
         }
 

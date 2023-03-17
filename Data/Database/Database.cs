@@ -1,7 +1,7 @@
 ﻿using RodentTribe.Data.Models;
 using SQLite;
 
-namespace RodentTribe.Data;
+namespace RodentTribe.Data.Database;
 
 public class Database
 {

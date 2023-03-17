@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="RodentTribe.Views.RodentView"
+<ContentView
+    x:Class="RodentTribe.Views.ModelsCollection"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:RodentTribe.Data.Converters"
-    BindingContext="{Binding RodentViewModel}">
-    <ContentPage.Resources>
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <ContentView.Resources>
         <Style x:Key="Icon" TargetType="Button">
             <Setter Property="BackgroundColor" Value="Transparent" />
             <Setter Property="HeightRequest" Value="50" />
             <Setter Property="WidthRequest" Value="50" />
         </Style>
-    </ContentPage.Resources>
+    </ContentView.Resources>
 
     <ScrollView>
         <StackLayout BackgroundColor="WhiteSmoke">
             <Grid Margin="10,15">
                 <Label
                     FontSize="30"
-                    Text="Грызуны"
+                    Text="{Binding ViewTitle}"
                     TextColor="Black" />
                 <Button
                     Command="{Binding ToggleEditModeCommand}"
@@ -44,7 +43,7 @@
                                 Command="{Binding BindingContext.SelectCommand, Source={x:Reference ModelsList}}"
                                 CommandParameter="{Binding}"
                                 FontSize="25"
-                                Text="{Binding IsMale, Converter={converters:GenderConverter}}"
+                                Text="{Binding Name}"
                                 TextColor="Black">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup Name="CommonStates">
@@ -76,4 +75,4 @@
                 Style="{StaticResource Key=Icon}" />
         </StackLayout>
     </ScrollView>
-</ContentPage>
+</ContentView>

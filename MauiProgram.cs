@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Maui;
-using RodentTribe.Data;
+using RodentTribe.Data.Database;
 using RodentTribe.ViewModels;
 
 namespace RodentTribe;

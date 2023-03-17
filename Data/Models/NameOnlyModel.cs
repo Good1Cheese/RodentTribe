@@ -7,12 +7,12 @@ public class NameOnlyModel : NotifyPropertyChanged
     private int _id;
     private string _name;
 
-    [PrimaryKey, AutoIncrement]
+    [PrimaryKey]
     [Column("id")]
     public int Id { get => _id; set => _id = value; }
 
     [Column("name")]
-    [MaxLength(128)]
+    [MaxLength(64)]
     public string Name
     {
         get => _name;

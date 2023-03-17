@@ -1,5 +1,5 @@
 ﻿using RodentTribe.Data;
-using RodentTribe.Data.Models;
+using RodentTribe.Data.Database;
 using RodentTribe.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -11,8 +11,7 @@ public abstract class ViewModelBase<TModel> : NotifyPropertyChanged, ICRUDViewMo
     protected readonly Database _database;
 
     public bool IsInEditMode { get; set; }
-    public TModel Selected { get; set; }
-    public ObservableCollection<TModel> List { get; private set; }
+    public ObservableCollection<TModel> Models { get; protected set; }
 
     public ICommand ToggleEditModeCommand { get; }
     public ICommand SelectCommand { get; }
@@ -23,16 +22,18 @@ public abstract class ViewModelBase<TModel> : NotifyPropertyChanged, ICRUDViewMo
     {
         _database = database;
 
-        Task.Run(async () =>
-        {
-            var list = await _database.Connection.Table<TModel>().ToListAsync();
-            List = new(list);
-        });
+        Task.Run(GetModels);
 
         ToggleEditModeCommand = new Command(ToggleEditMode);
         AddCommand = new Command(Add);
         DeleteCommand = new Command(Delete);
         SelectCommand = new Command(Select);
+    }
+
+    protected virtual async Task GetModels()
+    {
+        var models = await _database.Connection.Table<TModel>().ToListAsync();
+        Models = new(models);
     }
 
     private void ToggleEditMode()

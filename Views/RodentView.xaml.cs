@@ -1,3 +1,5 @@
+using RodentTribe.ViewModels;
+
 namespace RodentTribe.Views;
 
 public partial class RodentView : ContentPage
@@ -6,4 +8,10 @@ public partial class RodentView : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    protected override void OnAppearing()
+    {
+        var rodentViewModel = (RodentViewModel)BindingContext;
+        rodentViewModel.OnAppearing();
+    }
 }

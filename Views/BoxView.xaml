@@ -3,77 +3,7 @@
     x:Class="RodentTribe.Views.BoxView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:viewModels="clr-namespace:RodentTribe.ViewModels"
-    BindingContext="{Binding BoxViewModel}">
-    <ContentPage.Resources>
-        <Style x:Key="Icon" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="Transparent" />
-            <Setter Property="HeightRequest" Value="50" />
-            <Setter Property="WidthRequest" Value="50" />
-        </Style>
-    </ContentPage.Resources>
+    xmlns:views="clr-namespace:RodentTribe.Views">
 
-    <ScrollView>
-        <StackLayout BackgroundColor="WhiteSmoke">
-            <Grid Margin="10,15">
-                <Label
-                    FontSize="30"
-                    Text="Выбор бокса"
-                    TextColor="Black" />
-                <Button
-                    Command="{Binding ToggleEditModeCommand}"
-                    HeightRequest="35"
-                    HorizontalOptions="End"
-                    ImageSource="edit.svg"
-                    Style="{StaticResource Key=Icon}"
-                    WidthRequest="35" />
-            </Grid>
-            <CollectionView
-                x:Name="ClosetList"
-                Margin="10,25"
-                ItemsSource="{Binding List}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Button
-                                Margin="6"
-                                Padding="15"
-                                BackgroundColor="White"
-                                BorderColor="Black"
-                                BorderWidth="1"
-                                Command="{Binding Path=SelectCommand, Source={RelativeSource AncestorType={x:Type viewModels:BoxViewModel}}}"
-                                CommandParameter="{Binding}"
-                                FontSize="25"
-                                Text="{x:Binding Name}"
-                                TextColor="Black">
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup Name="CommonStates">
-                                        <VisualState Name="Normal" />
-                                        <VisualState Name="Selected">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="#e3e3e3" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                            </Button>
-                            <Button
-                                Margin="0,0,15,0"
-                                Command="{Binding DeleteCommand, Source={RelativeSource AncestorType={x:Type viewModels:BoxViewModel}}}"
-                                CommandParameter="{Binding}"
-                                HorizontalOptions="End"
-                                ImageSource="delete.svg"
-                                IsVisible="{Binding IsInEditMode, Source={RelativeSource AncestorType={x:Type viewModels:BoxViewModel}}}"
-                                Style="{StaticResource Key=Icon}" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Button
-                Command="{Binding AddCommand}"
-                ImageSource="add.svg"
-                IsVisible="{Binding IsInEditMode, Source={RelativeSource AncestorType={x:Type viewModels:BoxViewModel}}}"
-                Style="{StaticResource Key=Icon}" />
-        </StackLayout>
-    </ScrollView>
+    <views:ModelsCollection BindingContext="{Binding BoxViewModel}" />
 </ContentPage>
