@@ -1,4 +1,4 @@
-﻿using RodentTribe.Data.Database;
+﻿using RodentTribe.Data.Databases;
 using RodentTribe.Data.Models;
 
 namespace RodentTribe.ViewModels.Abstract;
@@ -10,7 +10,7 @@ public abstract class SimpleViewModel<TModel> : ViewModelBase<TModel> where TMod
     {
     }
 
-    public override async void Add(object obj)
+    public override async void Add()
     {
         var newItem = new TModel() { Name = "Новая запись" };
         await _database.Connection.InsertAsync(newItem);
@@ -31,18 +31,18 @@ public abstract class SimpleViewModel<TModel> : ViewModelBase<TModel> where TMod
             return;
         }
 
-        await MoveToNextView();
+        GoToNextView();
     }
 
     private async Task RenameSelected(TModel model)
     {
-        string newName = await Shell.Current.DisplayPromptAsync("Переименование", "Введите новое значение");
+        string name = await Shell.Current.DisplayPromptAsync("Переименование", "Введите новое значение");
 
-        if (string.IsNullOrWhiteSpace(newName)) return;
+        if (string.IsNullOrWhiteSpace(name)) return;
 
-        model.Name = newName;
+        model.Name = name;
         await _database.Connection.UpdateAsync(model);
     }
 
-    protected abstract Task MoveToNextView();
+    protected abstract void GoToNextView();
 }

@@ -3,24 +3,75 @@
 namespace RodentTribe.Data.Models;
 
 [Table("Rodents")]
-public class Rodent
+public partial class Rodent : NotifyPropertyChanged
 {
-    [PrimaryKey, AutoIncrement]
+    public const string MALE = "Самец";
+    public const string FEMALE = "Самка";
+
+    private AgeCategory.Categories _category;
+    private bool _isMale;
+    private bool _isPregnant;
+    private string _hallmarks;
+    private DateTime _birthDay;
+
+    [PrimaryKey]
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("age")]
-    public int Age { get; set; }
+    [Column("age_category")]
+    public AgeCategory.Categories Category
+    {
+        get => _category;
+        set
+        {
+            _category = value;
+            OnPropertyChanged();
+        }
+    }
 
     [Column("is_male")]
-    public bool IsMale { get; set; }
+    public bool IsMale
+    {
+        get => _isMale;
+        set
+        {
+            _isMale = value;
+            OnPropertyChanged();
+        }
+    }
 
     [Column("is_pregnant")]
-    public bool IsPregnant { get; set; }
+    public bool IsPregnant
+    {
+        get => _isPregnant;
+        set
+        {
+            _isPregnant = value;
+            OnPropertyChanged();
+        }
+    }
 
-    [Indexed]
     [Column("hall_marks")]
-    public string Hallmarks { get; set; }
+    public string Hallmarks
+    {
+        get => _hallmarks;
+        set
+        {
+            _hallmarks = value;
+            OnPropertyChanged();
+        }
+    }
+
+    [Column("birth_day")]
+    public DateTime BirthDay
+    {
+        get => _birthDay;
+        set
+        {
+            _birthDay = value;
+            OnPropertyChanged();
+        }
+    }
 
     [Indexed]
     [Column("closet_id")]

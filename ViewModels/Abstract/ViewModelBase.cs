@@ -1,5 +1,5 @@
 ﻿using RodentTribe.Data;
-using RodentTribe.Data.Database;
+using RodentTribe.Data.Databases;
 using RodentTribe.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -42,7 +42,7 @@ public abstract class ViewModelBase<TModel> : NotifyPropertyChanged, ICRUDViewMo
         OnPropertyChanged(nameof(IsInEditMode));
     }
 
-    public abstract void Add(object obj);
+    public abstract void Add();
     public abstract void Delete(object obj);
     public abstract void Select(object obj);
 }

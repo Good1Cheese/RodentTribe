@@ -1,4 +1,4 @@
-namespace RodentTribe.Views;
+namespace RodentTribe.Views.Shared;
 
 public partial class ModelsCollection : ContentView
 {

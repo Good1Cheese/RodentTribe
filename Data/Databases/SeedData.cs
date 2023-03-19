@@ -1,6 +1,6 @@
 ﻿using RodentTribe.Data.Models;
 
-namespace RodentTribe.Data.Database;
+namespace RodentTribe.Data.Databases;
 
 public static class SeedData
 {
@@ -77,37 +77,45 @@ public static class SeedData
             {
                 new Rodent
                 {
-                    Age = 1,
+                    Id = 1,
+                    Category = AgeCategory.Categories.Germ,
                     IsMale = true,
                     IsPregnant = false,
                     Hallmarks = "черный капюшон",
+                    BirthDay = DateTime.Today.AddMonths(-6),
                     ClosetId = 1,
                     BoxId = 1
                 },
                 new Rodent
                 {
-                    Age = 2,
+                    Id = 2,
+                    Category = AgeCategory.Categories.Germ,
                     IsMale = false,
                     IsPregnant = false,
                     Hallmarks = "фиолетовый капюшон",
+                    BirthDay = DateTime.Today.AddMonths(-7),
                     ClosetId = 1,
                     BoxId = 1
                 },
                 new Rodent
                 {
-                    Age = 3,
+                    Id = 3,
+                    Category = AgeCategory.Categories.Adult,
                     IsMale = false,
                     IsPregnant = false,
                     Hallmarks = "красный капюшон",
+                    BirthDay = DateTime.Today.AddMonths(-3),
                     ClosetId = 1,
                     BoxId = 1
                 },
                 new Rodent
                 {
-                    Age = 4,
+                    Id = 4,
+                    Category = AgeCategory.Categories.Teenager,
                     IsMale = false,
                     IsPregnant = false,
                     Hallmarks = "какой-то капюшон",
+                    BirthDay = DateTime.Today.AddMonths(-12),
                     ClosetId = 1,
                     BoxId = 1
                 }

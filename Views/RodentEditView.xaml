@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="RodentTribe.Views.RodentEditView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:RodentTribe.Data.Converters"
+    xmlns:data="clr-namespace:RodentTribe.Data"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    BindingContext="{Binding RodentEditViewModel}">
+    <ContentPage.Resources>
+        <Style x:Key="RegularText" TargetType="Button">
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderColor" Value="Black" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="Padding" Value="0,5" />
+            <Setter Property="Margin" Value="0,5" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout
+            x:Name="RodentDescrption"
+            Padding="15"
+            BackgroundColor="WhiteSmoke">
+            <Label
+                FontSize="25"
+                Text="Редактирование грызуна"
+                TextColor="Black" />
+
+            <VerticalStackLayout Margin="0,25" BindingContext="{Binding Source={Static data:SelectedModels.Rodent}}">
+                <Button
+                    Command="{Binding BindingContext.EditAgeCategoryCommand, Source={x:Reference RodentDescrption}}"
+                    Style="{StaticResource RegularText}"
+                    Text="{Binding Category, StringFormat='Категория - {0}', Converter={converters:AgeCategoryConverter}}" />
+                <Button
+                    Command="{Binding BindingContext.EditGenderCommand, Source={x:Reference RodentDescrption}}"
+                    Style="{StaticResource RegularText}"
+                    Text="{Binding IsMale, StringFormat='Пол - {0}', Converter={converters:GenderConverter}}" />
+                <Button
+                    Command="{Binding BindingContext.EditPregnantStatusCommand, Source={x:Reference RodentDescrption}}"
+                    IsVisible="{Binding IsMale, Converter={toolkit:InvertedBoolConverter}}"
+                    Style="{StaticResource RegularText}"
+                    Text="{Binding IsPregnant, StringFormat='Беременна - {0}', Converter={converters:YesOrNoConverter}}" />
+                <Button
+                    Command="{Binding BindingContext.EditBirthDayCommand, Source={x:Reference RodentDescrption}}"
+                    Style="{StaticResource RegularText}"
+                    Text="{Binding BirthDay, StringFormat='Возраст(в месяцах) - {0}', Converter={converters:BirthDayConverter}}" />
+                <Button
+                    Command="{Binding BindingContext.EditHallmarksCommand, Source={x:Reference RodentDescrption}}"
+                    LineBreakMode="WordWrap"
+                    Style="{StaticResource RegularText}"
+                    Text="{Binding Hallmarks, StringFormat='Отличительные черты: {0}'}" />
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout>
+                <Image Source="arrowleft.svg" />
+                <Button
+                    Margin="10,0"
+                    BackgroundColor="Transparent"
+                    BorderWidth="1"
+                    Command="{Binding GoToRodentViewCommand}"
+                    FontSize="20"
+                    Text="Обратно к грызунам" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

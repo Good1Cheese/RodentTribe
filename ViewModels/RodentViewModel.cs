@@ -1,7 +1,9 @@
-﻿using RodentTribe.Data;
-using RodentTribe.Data.Database;
+﻿using AndroidX.AppCompat.View.Menu;
+using RodentTribe.Data;
+using RodentTribe.Data.Databases;
 using RodentTribe.Data.Models;
 using RodentTribe.ViewModels.Abstract;
+using RodentTribe.Views;
 
 namespace RodentTribe.ViewModels;
 
@@ -18,8 +20,8 @@ public class RodentViewModel : ViewModelBase<Rodent>
         var models = _database.Connection.Table<Rodent>();
 
         models = from m in models
-                 where m.ClosetId == RodentOutput.Closet.Id
-                 where m.BoxId == RodentOutput.Box.Id
+                 where m.ClosetId == SelectedModels.Closet.Id
+                 where m.BoxId == SelectedModels.Box.Id
                  select m;
 
         Models = new(await models.ToListAsync());
@@ -28,9 +30,21 @@ public class RodentViewModel : ViewModelBase<Rodent>
 
     protected override Task GetModels() => null;
 
-    public override async void Add(object obj)
+    public override async void Add()
     {
-        // Create and go to edit view
+        var rodent = new Rodent 
+        {
+            Category = AgeCategory.Categories.Germ,
+            IsMale = false,
+            IsPregnant = false,
+            Hallmarks = "отсутствуют",
+            BirthDay = DateTime.Today,
+            ClosetId = SelectedModels.Closet.Id,
+            BoxId = SelectedModels.Box.Id
+        };
+
+        await _database.Connection.InsertAsync(rodent);
+        Models.Add(rodent);
     }
 
     public override async void Delete(object obj)
@@ -41,6 +55,7 @@ public class RodentViewModel : ViewModelBase<Rodent>
 
     public override async void Select(object obj)
     {
-        // Go to edit view
+        SelectedModels.Rodent = (Rodent)obj;
+        await Shell.Current.GoToAsync(nameof(RodentEditView));
     }
 }

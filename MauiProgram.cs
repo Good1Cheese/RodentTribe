@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
-using RodentTribe.Data.Database;
+using RodentTribe.Data.Databases;
 using RodentTribe.ViewModels;
+using System;
 
 namespace RodentTribe;
 
@@ -25,6 +26,7 @@ public static class MauiProgram
         services.AddSingleton<ClosetViewModel>();
         services.AddSingleton<BoxViewModel>();
         services.AddSingleton<RodentViewModel>();
+        services.AddSingleton<RodentEditViewModel>();
         services.AddSingleton<AppViewModel>();
 
         return builder.Build();

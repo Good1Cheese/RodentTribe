@@ -11,7 +11,9 @@ public partial class RodentView : ContentPage
 
     protected override void OnAppearing()
     {
-        var rodentViewModel = (RodentViewModel)BindingContext;
-        rodentViewModel.OnAppearing();
+        base.OnAppearing();
+
+        var viewModel = (RodentViewModel)BindingContext;
+        viewModel.OnAppearing();
     }
 }

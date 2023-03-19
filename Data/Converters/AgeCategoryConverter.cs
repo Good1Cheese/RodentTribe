@@ -1,17 +1,17 @@
-﻿using RodentTribe.Data.Models;
-using System.Globalization;
+﻿using System.Globalization;
+using RodentTribe.Data.Models;
 
 namespace RodentTribe.Data.Converters;
 
-public class GenderConverter : IValueConverter
+public class AgeCategoryConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (bool)value ? Rodent.MALE : Rodent.FEMALE;
+        return AgeCategory.Names[(int)value];
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (string)value == Rodent.MALE;
+        return (int)AgeCategory.GetCategoryByName((string)value);
     }
 }
