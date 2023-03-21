@@ -1,19 +1,29 @@
-﻿using AndroidX.AppCompat.View.Menu;
-using RodentTribe.Data;
+﻿using RodentTribe.Data;
 using RodentTribe.Data.Databases;
 using RodentTribe.Data.Models;
 using RodentTribe.ViewModels.Abstract;
+using RodentTribe.ViewModels.Interfaces;
 using RodentTribe.Views;
+using System.Windows.Input;
 
 namespace RodentTribe.ViewModels;
 
-public class RodentViewModel : ViewModelBase<Rodent>
+public class RodentViewModel : ViewModelBase<Rodent>, IAppearable
 {
+    public ICommand GoToFreeFemalesCommand { get; set; }
+    public ICommand GoToClosetViewCommand { get; set; }
+    public ICommand GoToBoxViewCommand { get; set; }
+
     public RodentViewModel(Database database)
         : base(database)
     {
-
+        GoToFreeFemalesCommand = new Command(GoToFreeFemales);
+        GoToClosetViewCommand = new Command(GoToClosetViewAsync);
+        GoToBoxViewCommand = new Command(GoToBoxView);
     }
+
+
+    protected override Task GetModels() => null;
 
     public async void OnAppearing()
     {
@@ -28,7 +38,9 @@ public class RodentViewModel : ViewModelBase<Rodent>
         OnPropertyChanged(nameof(Models));
     }
 
-    protected override Task GetModels() => null;
+    private async void GoToFreeFemales() => await Shell.Current.GoToAsync(nameof(FreeFemalesView));
+    private async void GoToClosetViewAsync() => await Shell.Current.GoToAsync(nameof(ClosetView));
+    private async void GoToBoxView() => await Shell.Current.GoToAsync(nameof(Views.BoxView));
 
     public override async void Add()
     {

@@ -1,23 +1,30 @@
 ﻿using CommunityToolkit.Maui.Alerts;
-using Java.Util;
 using RodentTribe.Data;
 using RodentTribe.Data.Converters;
 using RodentTribe.Data.Databases;
 using RodentTribe.Data.Models;
+using RodentTribe.ViewModels.Interfaces;
 using RodentTribe.Views;
 using System.Windows.Input;
 
 namespace RodentTribe.ViewModels;
 
-public class RodentEditViewModel
+public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
 {
     private readonly Database _database;
+
+    public List<Сloset> Closets { get; set; }
+    public List<Box> Boxes { get; set; }
+
+    public Сloset SelectedCloset { get; set; }
+    public Box SelectedBox { get; set; }
 
     public ICommand EditAgeCategoryCommand { get; }
     public ICommand EditGenderCommand { get; }
     public ICommand EditPregnantStatusCommand { get; }
     public ICommand EditHallmarksCommand { get; }
     public ICommand EditBirthDayCommand { get; }
+    public ICommand MoveRodentToNewClosetAndBoxCommand { get; }
     public ICommand GoToRodentViewCommand { get; }
     public bool IsChanged { get; set; }
 
@@ -30,7 +37,19 @@ public class RodentEditViewModel
         EditPregnantStatusCommand = new Command(EditPregnantStatus);
         EditHallmarksCommand = new Command(EditHallmarks);
         EditBirthDayCommand = new Command(EditBirthDay);
+        MoveRodentToNewClosetAndBoxCommand = new Command(MoveRodentToNewClosetAndBox);
         GoToRodentViewCommand = new Command(GoToRodentView);
+    }
+
+    public async void OnAppearing()
+    {
+        var closets = _database.Connection.Table<Сloset>();
+        Closets = new(await closets.ToListAsync());
+        OnPropertyChanged(nameof(Closets));
+
+        var boxes = _database.Connection.Table<Box>();
+        Boxes = new(await boxes.ToListAsync());
+        OnPropertyChanged(nameof(Boxes));
     }
 
     public async void OnDisappearing()
@@ -87,6 +106,21 @@ public class RodentEditViewModel
 
         SelectedModels.Rodent.BirthDay = DateTime.Today.AddMonths(-months);
         IsChanged = true;
+    }
+
+    private async void MoveRodentToNewClosetAndBox()
+    {
+        if (SelectedCloset == null || SelectedBox == null)
+        {
+            await Shell.Current.DisplayAlert("Неправильные данные", "Проверьте все поля на правильность", "ок");
+            return;
+        }
+
+        SelectedModels.Rodent.ClosetId = SelectedCloset.Id;
+        SelectedModels.Rodent.BoxId = SelectedBox.Id;
+
+        await _database.Connection.UpdateAsync(SelectedModels.Rodent);
+        await Shell.Current.DisplaySnackbar("Перемещение успешно");
     }
 
     private async void GoToRodentView()

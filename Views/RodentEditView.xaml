@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<shared:PageWithAppearableViewModel
     x:Class="RodentTribe.Views.RodentEditView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:RodentTribe.Data.Converters"
     xmlns:data="clr-namespace:RodentTribe.Data"
+    xmlns:shared="clr-namespace:RodentTribe.Views.Shared"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     BindingContext="{Binding RodentEditViewModel}">
     <ContentPage.Resources>
@@ -16,6 +17,17 @@
             <Setter Property="FontSize" Value="25" />
             <Setter Property="Padding" Value="0,5" />
             <Setter Property="Margin" Value="0,5" />
+        </Style>
+        <Style x:Key="Picker" TargetType="Picker">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="Black" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="Margin" Value="15" />
+        </Style>
+        <Style x:Key="SimpleButton" TargetType="Button">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
         </Style>
     </ContentPage.Resources>
 
@@ -54,16 +66,33 @@
                     Text="{Binding Hallmarks, StringFormat='Отличительные черты: {0}'}" />
             </VerticalStackLayout>
 
+            <VerticalStackLayout IsVisible="{Binding IsMale, Source={Static data:SelectedModels.Rodent}}">
+                <Picker
+                    Title="Выберите шкаф"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Closets}"
+                    SelectedItem="{Binding SelectedCloset}"
+                    Style="{StaticResource Picker}" />
+                <Picker
+                    Title="Выберите бокс"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding Boxes}"
+                    SelectedItem="{Binding SelectedBox}"
+                    Style="{StaticResource Picker}" />
+                <Button
+                    Margin="20,0"
+                    Command="{Binding MoveRodentToNewClosetAndBoxCommand}"
+                    Style="{StaticResource SimpleButton}"
+                    Text="Переместить" />
+            </VerticalStackLayout>
             <HorizontalStackLayout>
                 <Image Source="arrowleft.svg" />
                 <Button
-                    Margin="10,0"
-                    BackgroundColor="Transparent"
-                    BorderWidth="1"
+                    Margin="10,20"
                     Command="{Binding GoToRodentViewCommand}"
-                    FontSize="20"
+                    Style="{StaticResource SimpleButton}"
                     Text="Обратно к грызунам" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
-</ContentPage>
+</shared:PageWithAppearableViewModel>

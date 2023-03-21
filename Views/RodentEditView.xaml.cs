@@ -1,8 +1,9 @@
 using RodentTribe.ViewModels;
+using RodentTribe.Views.Shared;
 
 namespace RodentTribe.Views;
 
-public partial class RodentEditView : ContentPage
+public partial class RodentEditView : PageWithAppearableViewModel
 {
 	public RodentEditView()
 	{

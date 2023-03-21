@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <views:PageWithAppearableViewModel
-    x:Class="RodentTribe.Views.RodentView"
+    x:Class="RodentTribe.Views.FreeFemalesView"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:RodentTribe.Data.Converters"
     xmlns:views="clr-namespace:RodentTribe.Views.Shared"
-    BindingContext="{Binding RodentViewModel}">
+    BindingContext="{Binding FreeFemalesViewModel}">
     <ContentPage.Resources>
         <Style x:Key="Icon" TargetType="Button">
             <Setter Property="BackgroundColor" Value="Transparent" />
             <Setter Property="HeightRequest" Value="50" />
             <Setter Property="WidthRequest" Value="50" />
         </Style>
-        <Style x:Key="SimpleButton" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="Transparent" />
-            <Setter Property="BorderWidth" Value="1" />
-            <Setter Property="CornerRadius" Value="20" />
-            <Setter Property="FontSize" Value="23" />
-        </Style>
-
     </ContentPage.Resources>
 
     <ScrollView>
@@ -27,31 +20,17 @@
                 <Grid Margin="10,15">
                     <Label
                         FontSize="30"
-                        Text="Грызуны"
+                        Text="Свободные самки"
                         TextColor="Black" />
-                    <Button
-                        Command="{Binding ToggleEditModeCommand}"
-                        HeightRequest="35"
-                        HorizontalOptions="End"
-                        ImageSource="edit.svg"
-                        Style="{StaticResource Key=Icon}"
-                        WidthRequest="35" />
                 </Grid>
-                <HorizontalStackLayout>
-                    <Button
-                        Command="{Binding GoToClosetViewCommand}"
-                        Style="{StaticResource SimpleButton}"
-                        Text="Выбор шкафа" />
-                    <Button
-                        Command="{Binding GoToBoxViewCommand}"
-                        Style="{StaticResource SimpleButton}"
-                        Text="Выбор бокса" />
-                </HorizontalStackLayout>
                 <Button
-                    Margin="10,20,10,0"
-                    Command="{Binding GoToFreeFemalesCommand}"
-                    Style="{StaticResource SimpleButton}"
-                    Text="Все свободные самки" />
+                    Margin="10,0"
+                    BackgroundColor="Transparent"
+                    BorderWidth="1"
+                    Command="{Binding GoToRodentViewCommand}"
+                    CornerRadius="20"
+                    FontSize="23"
+                    Text="Обратно к грызунам" />
             </VerticalStackLayout>
             <CollectionView
                 x:Name="ModelsList"

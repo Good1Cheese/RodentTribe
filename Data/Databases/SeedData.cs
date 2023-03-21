@@ -10,7 +10,7 @@ public static class SeedData
         var connection = database.Connection;
 
         var closets = connection.Table<Сloset>();
-        if (closets.CountAsync().Result == 0)
+        if (closets.CountAsync()?.Result == 0)
         {
             var data = new List<Сloset>
             {

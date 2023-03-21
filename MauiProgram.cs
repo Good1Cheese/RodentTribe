@@ -26,6 +26,7 @@ public static class MauiProgram
         services.AddSingleton<ClosetViewModel>();
         services.AddSingleton<BoxViewModel>();
         services.AddSingleton<RodentViewModel>();
+        services.AddSingleton<FreeFemalesViewModel>();
         services.AddSingleton<RodentEditViewModel>();
         services.AddSingleton<AppViewModel>();
 

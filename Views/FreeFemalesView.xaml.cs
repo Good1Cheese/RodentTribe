@@ -3,9 +3,9 @@ using RodentTribe.Views.Shared;
 
 namespace RodentTribe.Views;
 
-public partial class RodentView : PageWithAppearableViewModel
+public partial class FreeFemalesView : PageWithAppearableViewModel
 {
-	public RodentView()
+	public FreeFemalesView()
 	{
 		InitializeComponent();
 	}
