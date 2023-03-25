@@ -61,23 +61,10 @@
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
                             </Button>
-                            <Button
-                                Margin="0,0,15,0"
-                                Command="{Binding BindingContext.DeleteCommand, Source={x:Reference ModelsList}}"
-                                CommandParameter="{Binding}"
-                                HorizontalOptions="End"
-                                ImageSource="delete.svg"
-                                IsVisible="{Binding BindingContext.IsInEditMode, Source={x:Reference ModelsList}}"
-                                Style="{StaticResource Key=Icon}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Button
-                Command="{Binding AddCommand}"
-                ImageSource="add.svg"
-                IsVisible="{Binding BindingContext.IsInEditMode, Source={x:Reference ModelsList}}"
-                Style="{StaticResource Key=Icon}" />
         </StackLayout>
     </ScrollView>
 </views:PageWithAppearableViewModel>

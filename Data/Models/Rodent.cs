@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace RodentTribe.Data.Models;
 
@@ -7,14 +8,17 @@ public partial class Rodent : NotifyPropertyChanged
 {
     public const string MALE = "Самец";
     public const string FEMALE = "Самка";
+    public static readonly int RestAfterChildbirthInDays = 30;  
 
     private AgeCategory.Categories _category;
     private bool _isMale;
     private bool _isPregnant;
     private string _hallmarks;
     private DateTime _birthDay;
+    private bool _wereChildbirth;
+    private DateTime _childbirthDate;
 
-    [PrimaryKey]
+    [PrimaryKey, AutoIncrement]
     [Column("id")]
     public int Id { get; set; }
 
@@ -69,6 +73,28 @@ public partial class Rodent : NotifyPropertyChanged
         set
         {
             _birthDay = value;
+            OnPropertyChanged();
+        }
+    }
+
+    [Column("were_childbirth")]
+    public bool WereChildbirth
+    {
+        get => _wereChildbirth;
+        set
+        {
+            _wereChildbirth = value;
+            OnPropertyChanged();
+        }
+    }
+
+    [Column("childbirth_date")]
+    public DateTime ChildbirthDate
+    {
+        get => _childbirthDate;
+        set
+        {
+            _childbirthDate = value;
             OnPropertyChanged();
         }
     }

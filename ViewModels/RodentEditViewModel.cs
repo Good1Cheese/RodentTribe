@@ -5,12 +5,15 @@ using RodentTribe.Data.Databases;
 using RodentTribe.Data.Models;
 using RodentTribe.ViewModels.Interfaces;
 using RodentTribe.Views;
+using System.Reflection;
 using System.Windows.Input;
 
 namespace RodentTribe.ViewModels;
 
 public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
 {
+    public const string CANCEL = "Отмена";
+
     private readonly Database _database;
 
     public List<Сloset> Closets { get; set; }
@@ -24,6 +27,8 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
     public ICommand EditPregnantStatusCommand { get; }
     public ICommand EditHallmarksCommand { get; }
     public ICommand EditBirthDayCommand { get; }
+    public ICommand RestAfterChildbirthCommand { get; }
+    public ICommand CancelRestAfterChildbirthCommand { get; }
     public ICommand MoveRodentToNewClosetAndBoxCommand { get; }
     public ICommand GoToRodentViewCommand { get; }
     public bool IsChanged { get; set; }
@@ -37,6 +42,9 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
         EditPregnantStatusCommand = new Command(EditPregnantStatus);
         EditHallmarksCommand = new Command(EditHallmarks);
         EditBirthDayCommand = new Command(EditBirthDay);
+        EditBirthDayCommand = new Command(EditBirthDay);
+        RestAfterChildbirthCommand = new Command(RestAfterChildbirth);
+        CancelRestAfterChildbirthCommand = new Command(CancelRestAfterChildbirth);
         MoveRodentToNewClosetAndBoxCommand = new Command(MoveRodentToNewClosetAndBox);
         GoToRodentViewCommand = new Command(GoToRodentView);
     }
@@ -65,8 +73,10 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
 
     private async void EditAgeCategory()
     {
-        var categoryName = await Shell.Current.DisplayActionSheet("Выбор возрастной категори", "Отмена", null, AgeCategory.Names);
+        var categoryName = await Shell.Current.DisplayActionSheet("Выбор возрастной категори", CANCEL, null, AgeCategory.Names);
         var category = AgeCategory.GetCategoryByName(categoryName);
+
+        if ((int)category == -1) return;
 
         SelectedModels.Rodent.Category = category;
         IsChanged = true;
@@ -74,7 +84,9 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
 
     private async void EditGender()
     {
-        var gender = await Shell.Current.DisplayActionSheet("Выбор пола", "Отмена", null, Rodent.MALE, Rodent.FEMALE);
+        var gender = await Shell.Current.DisplayActionSheet("Выбор пола", CANCEL, null, Rodent.MALE, Rodent.FEMALE);
+
+        if (gender == CANCEL) return;
 
         SelectedModels.Rodent.IsMale = gender == Rodent.MALE;
         IsChanged = true;
@@ -82,7 +94,9 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
 
     private async void EditPregnantStatus()
     {
-        var isPregnant = await Shell.Current.DisplayActionSheet("Изменение беременности", "Отмена", null, YesOrNoConverter.POSITIV, YesOrNoConverter.NEGATIV);
+        var isPregnant = await Shell.Current.DisplayActionSheet("Изменение беременности", CANCEL, null, YesOrNoConverter.POSITIV, YesOrNoConverter.NEGATIV);
+
+        if (isPregnant == CANCEL) return;
 
         SelectedModels.Rodent.IsPregnant = isPregnant == YesOrNoConverter.POSITIV;
         IsChanged = true;
@@ -105,6 +119,20 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
         if (string.IsNullOrWhiteSpace(date) || !int.TryParse(date, out int months)) return;
 
         SelectedModels.Rodent.BirthDay = DateTime.Today.AddMonths(-months);
+        IsChanged = true;
+    }
+
+    private void RestAfterChildbirth()
+    {
+        SelectedModels.Rodent.WereChildbirth = true;
+        SelectedModels.Rodent.ChildbirthDate = DateTime.Today.AddDays(Rodent.RestAfterChildbirthInDays);
+        IsChanged = true;
+    }
+
+    private void CancelRestAfterChildbirth()
+    {
+        SelectedModels.Rodent.WereChildbirth = false;
+        SelectedModels.Rodent.ChildbirthDate = default;
         IsChanged = true;
     }
 

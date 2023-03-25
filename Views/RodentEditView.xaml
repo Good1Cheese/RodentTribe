@@ -9,11 +9,18 @@
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     BindingContext="{Binding RodentEditViewModel}">
     <ContentPage.Resources>
-        <Style x:Key="RegularText" TargetType="Button">
+        <Style x:Key="RegularButton" TargetType="Button">
             <Setter Property="BorderWidth" Value="1" />
             <Setter Property="BorderColor" Value="Black" />
             <Setter Property="TextColor" Value="Black" />
             <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="Padding" Value="0,5" />
+            <Setter Property="Margin" Value="0,5" />
+        </Style>
+        <Style x:Key="RegularText" TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
             <Setter Property="FontSize" Value="25" />
             <Setter Property="Padding" Value="0,5" />
             <Setter Property="Margin" Value="0,5" />
@@ -44,26 +51,31 @@
             <VerticalStackLayout Margin="0,25" BindingContext="{Binding Source={Static data:SelectedModels.Rodent}}">
                 <Button
                     Command="{Binding BindingContext.EditAgeCategoryCommand, Source={x:Reference RodentDescrption}}"
-                    Style="{StaticResource RegularText}"
+                    Style="{StaticResource RegularButton}"
                     Text="{Binding Category, StringFormat='Категория - {0}', Converter={converters:AgeCategoryConverter}}" />
                 <Button
                     Command="{Binding BindingContext.EditGenderCommand, Source={x:Reference RodentDescrption}}"
-                    Style="{StaticResource RegularText}"
+                    Style="{StaticResource RegularButton}"
                     Text="{Binding IsMale, StringFormat='Пол - {0}', Converter={converters:GenderConverter}}" />
                 <Button
                     Command="{Binding BindingContext.EditPregnantStatusCommand, Source={x:Reference RodentDescrption}}"
                     IsVisible="{Binding IsMale, Converter={toolkit:InvertedBoolConverter}}"
-                    Style="{StaticResource RegularText}"
+                    Style="{StaticResource RegularButton}"
                     Text="{Binding IsPregnant, StringFormat='Беременна - {0}', Converter={converters:YesOrNoConverter}}" />
                 <Button
                     Command="{Binding BindingContext.EditBirthDayCommand, Source={x:Reference RodentDescrption}}"
-                    Style="{StaticResource RegularText}"
+                    Style="{StaticResource RegularButton}"
                     Text="{Binding BirthDay, StringFormat='Возраст(в месяцах) - {0}', Converter={converters:BirthDayConverter}}" />
                 <Button
                     Command="{Binding BindingContext.EditHallmarksCommand, Source={x:Reference RodentDescrption}}"
                     LineBreakMode="WordWrap"
-                    Style="{StaticResource RegularText}"
+                    Style="{StaticResource RegularButton}"
                     Text="{Binding Hallmarks, StringFormat='Отличительные черты: {0}'}" />
+                <Label
+                    IsVisible="{Binding WereChildbirth}"
+                    LineBreakMode="WordWrap"
+                    Style="{StaticResource RegularText}"
+                    Text="{Binding ChildbirthDate, Converter={converters:RestAfterChildbirthConverter}, StringFormat='Осталось дней отдыха: {0}'}" />
             </VerticalStackLayout>
 
             <VerticalStackLayout IsVisible="{Binding IsMale, Source={Static data:SelectedModels.Rodent}}">
@@ -84,6 +96,21 @@
                     Command="{Binding MoveRodentToNewClosetAndBoxCommand}"
                     Style="{StaticResource SimpleButton}"
                     Text="Переместить" />
+            </VerticalStackLayout>
+            <VerticalStackLayout IsVisible="{Binding IsMale, Source={Static data:SelectedModels.Rodent}, Converter={toolkit:InvertedBoolConverter}}">
+                <Button
+                    Margin="10,5"
+                    Command="{Binding RestAfterChildbirthCommand}"
+                    IsVisible="{Binding WereChildbirth, Source={Static data:SelectedModels.Rodent}, Converter={toolkit:InvertedBoolConverter}}"
+                    Style="{StaticResource SimpleButton}"
+                    Text="Прошли роды" />
+                <Button
+                    Margin="10,5"
+                    Command="{Binding CancelRestAfterChildbirthCommand}"
+                    IsVisible="{Binding WereChildbirth, Source={Static data:SelectedModels.Rodent}}"
+                    LineBreakMode="WordWrap"
+                    Style="{StaticResource SimpleButton}"
+                    Text="Отмена послеродного отдыха" />
             </VerticalStackLayout>
             <HorizontalStackLayout>
                 <Image Source="arrowleft.svg" />

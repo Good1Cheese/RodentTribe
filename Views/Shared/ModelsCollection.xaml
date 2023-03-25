@@ -42,7 +42,7 @@
                                 Command="{Binding BindingContext.SelectCommand, Source={x:Reference ModelsList}}"
                                 CommandParameter="{Binding}"
                                 FontSize="25"
-                                Text="{Binding Name}"
+                                Text="{Binding Id}"
                                 TextColor="Black">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup Name="CommonStates">

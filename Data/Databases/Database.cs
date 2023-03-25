@@ -5,9 +5,9 @@ namespace RodentTribe.Data.Databases;
 
 public class Database
 {
-    public const string DatabaseFileName = "RodentTribe.db";
+    public const string DATABASE_FILE_NAME = "RodentTribe.db";
 
-    public static string DatabasePath => Path.Combine(FileSystem.AppDataDirectory, DatabaseFileName);
+    public static string DatabasePath => Path.Combine(FileSystem.AppDataDirectory, DATABASE_FILE_NAME);
 
     public SQLiteAsyncConnection Connection { get; private set; }
 

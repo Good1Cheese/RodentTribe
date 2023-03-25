@@ -70,14 +70,13 @@ public static class SeedData
         }
 
         var rodents = connection.Table<Rodent>();
-        //rodents.DeleteAsync(_ => true);
+        rodents.DeleteAsync(_ => true);
         if (rodents.CountAsync().Result == 0)
         {
             var data = new List<Rodent>
             {
                 new Rodent
                 {
-                    Id = 1,
                     Category = AgeCategory.Categories.Germ,
                     IsMale = true,
                     IsPregnant = false,
@@ -88,7 +87,6 @@ public static class SeedData
                 },
                 new Rodent
                 {
-                    Id = 2,
                     Category = AgeCategory.Categories.Germ,
                     IsMale = false,
                     IsPregnant = false,
@@ -99,7 +97,6 @@ public static class SeedData
                 },
                 new Rodent
                 {
-                    Id = 3,
                     Category = AgeCategory.Categories.Adult,
                     IsMale = false,
                     IsPregnant = false,
@@ -110,7 +107,6 @@ public static class SeedData
                 },
                 new Rodent
                 {
-                    Id = 4,
                     Category = AgeCategory.Categories.Teenager,
                     IsMale = false,
                     IsPregnant = false,

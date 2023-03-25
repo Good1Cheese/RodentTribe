@@ -7,7 +7,7 @@ public class NameOnlyModel : NotifyPropertyChanged
     private int _id;
     private string _name;
 
-    [PrimaryKey]
+    [PrimaryKey, AutoIncrement]
     [Column("id")]
     public int Id { get => _id; set => _id = value; }
 
