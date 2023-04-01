@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using RodentTribe.Data.Databases;
 using RodentTribe.ViewModels;
-using System;
 
 namespace RodentTribe;
 
@@ -18,10 +17,13 @@ public static class MauiProgram
         var services = builder.Services;
 
         services.AddSingleton<Database>();
+
+#if DEBUG
         using (var provider = services.BuildServiceProvider())
         {
             SeedData.Initialize(provider);
         }
+#endif
 
         services.AddSingleton<ClosetViewModel>();
         services.AddSingleton<BoxViewModel>();
