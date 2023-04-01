@@ -11,6 +11,7 @@ public partial class Rodent : NotifyPropertyChanged
     public static readonly int RestAfterChildbirthInDays = 30;  
 
     private AgeCategory.Categories _category;
+    private Rodents.Types _type;
     private bool _isMale;
     private bool _isPregnant;
     private string _hallmarks;
@@ -29,6 +30,17 @@ public partial class Rodent : NotifyPropertyChanged
         set
         {
             _category = value;
+            OnPropertyChanged();
+        }
+    }
+
+    [Column("rodent_type")]
+    public Rodents.Types Type
+    {
+        get => _type;
+        set
+        {
+            _type = value;
             OnPropertyChanged();
         }
     }

@@ -27,7 +27,6 @@ public class FreeFemalesViewModel : ViewModelBase<Rodent>, IAppearable
         models = from m in models
                  where !m.IsMale
                  where m.WereChildbirth
-                 where m.ChildbirthDate < DateTime.Today
                  select m;
 
         Models = new(await models.ToListAsync());

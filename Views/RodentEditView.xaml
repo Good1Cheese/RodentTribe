@@ -54,6 +54,10 @@
                     Style="{StaticResource RegularButton}"
                     Text="{Binding Category, StringFormat='Категория - {0}', Converter={converters:AgeCategoryConverter}}" />
                 <Button
+                    Command="{Binding BindingContext.EditAgeCategoryCommand, Source={x:Reference RodentDescrption}}"
+                    Style="{StaticResource RegularButton}"
+                    Text="{Binding Type, StringFormat='Тип - {0}', Converter={converters:TypeConverter}}" />
+                <Button
                     Command="{Binding BindingContext.EditGenderCommand, Source={x:Reference RodentDescrption}}"
                     Style="{StaticResource RegularButton}"
                     Text="{Binding IsMale, StringFormat='Пол - {0}', Converter={converters:GenderConverter}}" />

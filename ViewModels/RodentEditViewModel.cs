@@ -23,6 +23,7 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
     public Box SelectedBox { get; set; }
 
     public ICommand EditAgeCategoryCommand { get; }
+    public ICommand EditTypeCommand { get; }
     public ICommand EditGenderCommand { get; }
     public ICommand EditPregnantStatusCommand { get; }
     public ICommand EditHallmarksCommand { get; }
@@ -38,6 +39,7 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
         _database = database;
 
         EditAgeCategoryCommand = new Command(EditAgeCategory);
+        EditAgeCategoryCommand = new Command(EditType);
         EditGenderCommand = new Command(EditGender);
         EditPregnantStatusCommand = new Command(EditPregnantStatus);
         EditHallmarksCommand = new Command(EditHallmarks);
@@ -79,6 +81,17 @@ public class RodentEditViewModel : NotifyPropertyChanged, IAppearable
         if ((int)category == -1) return;
 
         SelectedModels.Rodent.Category = category;
+        IsChanged = true;
+    }
+
+    private async void EditType()
+    {
+        var categoryName = await Shell.Current.DisplayActionSheet("Выбор возрастной категори", CANCEL, null, Rodents.Names);
+        var type = Rodents.GetTypeByName(categoryName);
+
+        if ((int)type == -1) return;
+
+        SelectedModels.Rodent.Type = type;
         IsChanged = true;
     }
 

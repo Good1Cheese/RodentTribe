@@ -9,6 +9,10 @@ public static class SeedData
         var database = serviceProvider.GetRequiredService<Database>();
         var connection = database.Connection;
 
+        //connection.DropTableAsync<Сloset>();
+        //connection.DropTableAsync<Box>();
+        //connection.DropTableAsync<Rodent>();
+
         var closets = connection.Table<Сloset>();
         if (closets.CountAsync()?.Result == 0)
         {
@@ -16,22 +20,18 @@ public static class SeedData
             {
                 new Сloset
                 {
-                    Id = 1,
                     Name = "Шкаф 1"
                 },
                 new Сloset
                 {
-                    Id = 2,
                     Name = "Шкаф 2"
                 },
                 new Сloset
                 {
-                    Id = 3,
                     Name = "Шкаф 3"
                 },
                 new Сloset
                 {
-                    Id = 4,
                     Name = "Шкаф 4"
                 }
             };
@@ -40,28 +40,28 @@ public static class SeedData
         }
 
         var boxes = connection.Table<Box>();
-        if (boxes.CountAsync().Result == 0)
+        if (boxes.CountAsync()?.Result == 0)
         {
             var data = new List<Box>
             {
                 new Box
                 {
-                    Id = 1,
+                    ClosetId = 1,
                     Name = "Бокс 1"
                 },
                 new Box
                 {
-                    Id = 2,
+                    ClosetId = 1,
                     Name = "Бокс 2"
                 },
                 new Box
                 {
-                    Id = 3,
+                    ClosetId = 1,
                     Name = "Бокс 3"
                 },
                 new Box
                 {
-                    Id = 4,
+                    ClosetId = 1,
                     Name = "Бокс 4"
                 }
             };
@@ -70,14 +70,14 @@ public static class SeedData
         }
 
         var rodents = connection.Table<Rodent>();
-        rodents.DeleteAsync(_ => true);
-        if (rodents.CountAsync().Result == 0)
+        if (rodents.CountAsync()?.Result == 0)
         {
             var data = new List<Rodent>
             {
                 new Rodent
                 {
                     Category = AgeCategory.Categories.Germ,
+                    Type = Rodents.Types.Rat,
                     IsMale = true,
                     IsPregnant = false,
                     Hallmarks = "черный капюшон",
@@ -88,6 +88,7 @@ public static class SeedData
                 new Rodent
                 {
                     Category = AgeCategory.Categories.Germ,
+                    Type = Rodents.Types.Rat,
                     IsMale = false,
                     IsPregnant = false,
                     Hallmarks = "фиолетовый капюшон",
@@ -98,6 +99,7 @@ public static class SeedData
                 new Rodent
                 {
                     Category = AgeCategory.Categories.Adult,
+                    Type = Rodents.Types.Rat,
                     IsMale = false,
                     IsPregnant = false,
                     Hallmarks = "красный капюшон",
@@ -108,6 +110,7 @@ public static class SeedData
                 new Rodent
                 {
                     Category = AgeCategory.Categories.Teenager,
+                    Type = Rodents.Types.Rat,
                     IsMale = false,
                     IsPregnant = false,
                     Hallmarks = "какой-то капюшон",
